@@ -52,6 +52,7 @@
     <Compile Include="Bai4-th3.cs" />
     <Compile Include="Bai4-th4.cs" />
     <Compile Include="Bai5-th3.cs" />
+    <Compile Include="Bai5-th4.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
