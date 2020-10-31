@@ -37,13 +37,12 @@ namespace Baith3_4
         {
             double k = cannang / (chieucao * chieucao); ;
             if (k > 25) return 1;
-            else if (k < 19) return -1;
-            else return 0;
+            else if (k > 19) return 0;
+            else return -1;
          }
-        public override string ToString()
-
+        public void Hien()
         {
-            return this.hoten + " " +this.namsinh +this. chieucao + this.cannang;
+            Console.WriteLine("Ho ten:{0}\tNamsinh:{1}\tChieucao:{2}\tCannang:{3}", Hoten, namsinh, Chieucao, Cannang);
         }
         public string Hoten
         {
@@ -87,15 +86,20 @@ namespace Baith3_4
         public Nguoi Cong(Nguoi t2)
         {
             Nguoi t = new Nguoi();
-            t.cannang = this.cannang + t2.cannang;
+            t.Cannang = this.Cannang + t2.Cannang;
             return t;
         }
-        public Nguoi Tong(double f)
+        public Nguoi Tong(int f)
         {
             Nguoi t = new Nguoi();
-            t.cannang = this.cannang + f;
+            t.Cannang = this.Cannang + f;
             return t;
         } 
+        public void Hiencn()
+        {
+            Console.WriteLine("{0}", Cannang);
+        }
+       
     }
     class QlP
     {
@@ -114,27 +118,48 @@ namespace Baith3_4
         public void Hien()
         {
             for (int i = 0; i < 5; i++)
-                ds[i].ToString();
+                ds[i].Hien();
         }
         public void Hiends()
         {
             for (int i = 0; i < 5; i++)
-                if (ds[i].Chieucao > 1.7 && ds[i].Cannang > 70)
-                    ds[i].ToString();
+            {
+                if (ds[i].Chieucao >= 1.7 && ds[i].Cannang >= 70)
+                    ds[i].Hien();
+            }
         }
         public void Hiensk()
         {
+            int f = 0;
             for (int i = 0; i < 5; i++)
-                do
+            {
+                if (ds[i].Trave() == -1)
                 {
-                    if (ds[i].Trave() == -1)
+                    ds[i].Hien();
+                    f++;
+                    ds[i].Tong(f);
+                    if (ds[i].Trave() == 0)
                     {
-                        ds[i].Cannang++;
-
-                        ds[i].ToString();
+                        break;
                     }
-                } while (ds[i].Trave() != 1);
+                    Console.WriteLine("Can tang them so can la:{0}", f);
+                    
+                }
+            }
         }
+        public Nguoi DK()
+        {
+            Nguoi P = new Nguoi();
+            for (int i = 0; i < 5; i++)
+            {
+                
+                P = P.Cong(ds[i]);
+            }
+            return P;
+
+            
+        } 
+        
     }
     class App
     {
@@ -143,8 +168,11 @@ namespace Baith3_4
             QlP t = new QlP();
             t.Nhap();
             t.Hien();
+            Console.WriteLine("Nhung nguoi co chieu cao tren 1m7 va trong luong >=70kg");
             t.Hiends();
+            Console.WriteLine("Nhung nguoi co suc khoe yeu can tang them so can la:");
             t.Hiensk();
+            t.DK().Hiencn();
             Console.ReadKey();
 
         }
